@@ -1,6 +1,24 @@
 const express = require('express');
 const app = express();
+const nunjucks = require('nunjucks');
 const logger = require('volleyball');
+
+const locals = {
+  title: 'Magnificent Title',
+  people: [
+    {name: 'Gandalf'},
+    {name: 'Frodo'},
+    {name: 'Hermione'}
+  ]
+};
+
+nunjucks.configure('views', {noCache: true});
+nunjucks.render('index.html', locals, function(err, output) {
+  if (err) { throw err }
+  console.log(output);
+});
+
+
 
 app.use(logger);
 
