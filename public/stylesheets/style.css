@@ -43,6 +43,8 @@ code {
 
 .tweetbox {
   padding: 7px;
+  list-style-type: none;
+  color: #00aced;
 }
 
 .tweetbox img {
@@ -54,6 +56,6 @@ code {
 .content {
   margin-left: 60px;
 }
-.content .by {
+.tweetbox .by {
   font-weight: bold;
 }
