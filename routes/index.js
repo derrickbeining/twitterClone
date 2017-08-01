@@ -6,30 +6,36 @@ const jsonParser = bodyParser.json();
 
 const tweetBank = require('../tweetBank');
 
-router.use(express.static('public'));
+module.exports = function (io){
 
-router.get('/', function(req, res) {
-  const tweets = tweetBank.list();
-  res.render( 'index', {tweets: tweets, showForm: true});
-});
+  router.use(express.static('public'));
 
-router.get('/users/:name', function(req, res) {
-  const name = req.params.name;
-  const list = tweetBank.find( {name: name} );
-  res.render( 'index', { tweets: list, showForm: false } );
-});
+  router.get('/', function(req, res) {
+    const tweets = tweetBank.list();
+    res.render( 'index', {tweets: tweets, showForm: true});
+  });
 
-router.get('/tweet/:id', function(req, res) {
-  const id = Number.parseInt(req.params.id);
-  const list = tweetBank.find( {id: id} );
-  res.render('index', {tweets: list, showForm: false});
-});
+  router.get('/users/:name', function(req, res) {
+    const name = req.params.name;
+    const list = tweetBank.find( {name: name} );
+    res.render( 'index', { tweets: list, showForm: true } );
+  });
 
-router.post('/tweets', urlEncodedParser, function(req, res) {
-  const name = req.body.name;
-  const text = req.body.text;
-  tweetBank.add(name, text);
-  res.redirect('/');
-})
+  router.get('/tweet/:id', function(req, res) {
+    const id = Number.parseInt(req.params.id);
+    const list = tweetBank.find( {id: id} );
+    res.render('index', {tweets: list, showForm: false});
+  });
 
-module.exports = router;
+  router.post('/tweets', urlEncodedParser, function(req, res) {
+    const name = req.body.name;
+    const text = req.body.text;
+    tweetBank.add(name, text);
+    io.sockets.emit('newTweet', {{name : name, tweet : tweet}})
+    res.redirect('/');
+  })
+
+
+
+  return router;
+};

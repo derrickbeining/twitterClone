@@ -15,7 +15,7 @@
       {% if showForm %}
         <form action="/tweets" method="POST">
           <label for="name_field">Name:</label>
-          <input type="text" name="name" id="name_field" placeholder="Jane Doe">
+          <input type="text" name="name" id="name_field" value="{{tweets[0].name}}">
 
           <label for="text_field">Text:</label>
           <input type="text" name="text" id="text_field" class="new-tweet-input">
