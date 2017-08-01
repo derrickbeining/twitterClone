@@ -12,22 +12,26 @@ const locals = {
   ]
 };
 
+//config
 nunjucks.configure('views', {noCache: true});
 nunjucks.render('index.html', locals, function(err, output) {
   if (err) { throw err }
   console.log(output);
 });
 
+app.set('view engine', 'html')
 app.engine('html', require('nunjucks').render)
 
-app.set('view engine', 'html')
+nunjucks.configure('/views',{noCache: true});
 
-nunjucks.configure('/views')
+
+// server
 
 app.use(logger);
 
-app.get('/cats/:thing', function(req, res) {
-  res.send('You made it to the ' + req.params.thing + ' page!')
+app.get('/', function(req, res) {
+  const people = [{name: 'Full'}, {name: 'Stacker'}, {name: 'Son'}];
+  res.render( 'index', {title: 'Hall of Fame', people: people} );
 });
 
 
