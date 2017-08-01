@@ -20,9 +20,9 @@ nunjucks.render('index.html', locals, function(err, output) {
 });
 
 app.set('view engine', 'html')
-app.engine('html', require('nunjucks').render)
+app.engine('html', nunjucks.render)
 
-nunjucks.configure('/views',{noCache: true});
+nunjucks.configure('views',{noCache: true});
 
 
 // server
