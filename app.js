@@ -18,7 +18,11 @@ nunjucks.render('index.html', locals, function(err, output) {
   console.log(output);
 });
 
+app.engine('html', require('nunjucks').render)
 
+app.set('view engine', 'html')
+
+nunjucks.configure('/views')
 
 app.use(logger);
 
