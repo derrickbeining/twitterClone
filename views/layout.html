@@ -79,15 +79,35 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
   </body>
-  <script src = '/socket.io/socket.io.js'></script>
+  <script src = "/socket.io/socket.io.js"></script>
   <script>
     var socket = io.connect();
-    socket.on('connect', function(){
-      console.log('connected to server via WebSockets!')
+    socket.on("connect", function(){
+      console.log("connected to server via WebSockets!")
     });
-    socket.on('newTweet', function (tweet) {
-       console.log(tweet);
-      alert('Refreshing... check the console...');
+    socket.on("newTweet", function (tweet) {
+      console.log("tweet id:", tweet.id);
+      const tweetsFeed = document.getElementById("tweet-feed");
+      const newTweetLi = document.createElement("li");
+              newTweetLi.classList.add("tweetbox", "text-muted");
+      const img = document.createElement("img");
+      const nameDiv = document.createElement("div");
+              nameDiv.classList.add("content", "by");
+      const name = document.createElement("a");
+              name.setAttribute("href", "/users/" + tweet.name.split(" ").join("%20"));
+              name.textContent = tweet.name;
+      const tweetDiv = document.createElement("div");
+              tweetDiv.classList.add("content");
+      const newTweet = document.createElement("a");
+              newTweet.setAttribute("href", "/tweet/" + tweet.id);
+              newTweet.textContent = tweet.tweet;
+      nameDiv.appendChild(name);
+      tweetDiv.appendChild(newTweet);
+      newTweetLi.appendChild(img);
+      newTweetLi.appendChild(nameDiv);
+      newTweetLi.appendChild(tweetDiv);
+      tweetsFeed.appendChild(newTweetLi);
+      console.log("new tweet", newTweetLi);
     });
   </script>
 
