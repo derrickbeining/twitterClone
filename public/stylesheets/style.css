@@ -41,6 +41,10 @@ code {
   font-size: 80%;
 }
 
+.new-tweet-input {
+  width: 350px;
+}
+
 .tweetbox {
   padding: 7px;
   list-style-type: none;
