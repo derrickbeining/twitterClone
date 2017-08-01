@@ -1,0 +1,24 @@
+{
+  "name": "twitterclone",
+  "version": "1.0.0",
+  "description": "a twitter-style social app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/derrickbeining/twitterClone.git"
+  },
+  "author": "Derrick Beining",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/derrickbeining/twitterClone/issues"
+  },
+  "homepage": "https://github.com/derrickbeining/twitterClone#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "volleyball": "^1.4.1"
+  }
+}
